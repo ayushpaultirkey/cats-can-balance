@@ -58,14 +58,16 @@ export const BalanceGame: React.FC = () => {
 
     animationFrame.current = requestAnimationFrame(gameLoop);
   };
-  /*
+  
   useEffect(() => {
+    console.log("started");
     animationFrame.current = requestAnimationFrame(gameLoop);
     return () => {
+      console.log("end");
       if (animationFrame.current) cancelAnimationFrame(animationFrame.current);
     };
   }, []);
-  */
+  
   return <>
       <div>
         <label>Cats can balance</label>
