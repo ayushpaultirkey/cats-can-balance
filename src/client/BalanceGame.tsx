@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useCallback, useRef } from 'react';
-import testSprite from 'assets/sprite.png'
+//import testSprite from 'assets/sprite.png'
 
 
 export const BalanceGame: React.FC = () => {
@@ -94,18 +94,7 @@ export const BalanceGame: React.FC = () => {
           <div>Score: {Math.round(balance)}</div>
           <div>Status: {status}</div>
         </div>
-        
-        <div
-          className="sprite"
-          style={{
-            width: "64px",
-            height: "64px",
-            backgroundImage: 'url(' + testSprite + ')',
-            backgroundPosition: getSpritePosition(balance),
-            backgroundSize: "640px 640px"
-          }}
-        />
-        
+      
       </div>
   </>
 }
