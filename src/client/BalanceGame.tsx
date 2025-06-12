@@ -59,7 +59,6 @@ export const BalanceGame: React.FC = () => {
     balanceRef.current = nextBalance;
     setBalance(nextBalance);
 
-    console.log("running", nextBalance, status);
     animationRef.current = requestAnimationFrame(gameLoop);
   };
   
@@ -69,6 +68,15 @@ export const BalanceGame: React.FC = () => {
       if (animationRef.current) cancelAnimationFrame(animationRef.current);
     };
   }, []);
+  
+  const getSpritePosition = (balance) => {
+    const frame = Math.min(99, Math.max(0, Math.floor(balance)));
+    const col = frame % 10;
+    const row = Math.floor(frame / 10);
+    const x = -col * 64;
+    const y = -row * 64;
+    return `${x}px ${y}px`;
+  };
   
   return <>
     <div>
@@ -84,8 +92,8 @@ export const BalanceGame: React.FC = () => {
         onMouseLeave={() => (hoverRef.current = null)}>Right</div>
 
       <div>
-        <label>Score: {Math.round(balance)}</label>
-        <label>Status: {status}</label>
+        <div>Score: {Math.round(balance)}</div>
+        <div>Status: {status}</div>
       </div>
     
     </div>
