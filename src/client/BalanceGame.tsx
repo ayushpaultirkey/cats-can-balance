@@ -64,10 +64,8 @@ export const BalanceGame: React.FC = () => {
   };
   
   useEffect(() => {
-    console.log("started");
     animationRef.current = requestAnimationFrame(gameLoop);
     return () => {
-      console.log("end");
       if (animationRef.current) cancelAnimationFrame(animationRef.current);
     };
   }, []);
