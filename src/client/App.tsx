@@ -1,8 +1,8 @@
 import { Game } from './Game';
-import { Game } from './Game';
+import { BalanceGame } from './BalanceGame';
 
 export const App = () => {
     return <>
-        <Game />
+        <BalanceGame />
     </>;
 };
