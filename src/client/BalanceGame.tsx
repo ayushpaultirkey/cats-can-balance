@@ -6,6 +6,7 @@ export const BalanceGame: React.FC = () => {
   const [balance, setBalance] = useState(50);
   const [status, setStatus] = useState("Perfectly Balanced");
 
+  const balanceRef = useRef<number>(50);
   const hovering = useRef<"left" | "right" | null>(null);
   const lastTime = useRef<number>(performance.now());
   const animationFrame = useRef<number>();
@@ -28,7 +29,7 @@ export const BalanceGame: React.FC = () => {
     const delta = (currentTime - lastTime.current) / 1000;
     lastTime.current = currentTime;
 
-    let nextBalance = balance;
+    let nextBalance = balanceRef.current;
     const diff = Math.abs(nextBalance - 50);
     const drift = getDriftSpeed(diff) * delta * 30;
 
@@ -47,15 +48,17 @@ export const BalanceGame: React.FC = () => {
     if (hovering.current === "right") nextBalance += hoverForce;
 
     if (nextBalance < 0 || nextBalance > 100) {
-      setBalance(50);
+      newBalance = 50;
       setStatus("💀 You lost balance!");
       lastTime.current = currentTime;
-      //return;
     } else {
-      setBalance(nextBalance);
       updateStatus(nextBalance);
     }
 
+    balanceRef.current = nextBalance;
+    setBalance(nextBalance);
+
+    console.log("running", nextBalance, status);
     animationFrame.current = requestAnimationFrame(gameLoop);
   };
   
