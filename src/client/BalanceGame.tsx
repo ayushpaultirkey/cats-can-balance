@@ -70,8 +70,15 @@ export const BalanceGame: React.FC = () => {
   return <>
       <div>
         <label>Cats can balance</label>
-        <button>Left</button>
-        <button>Right</button>
+        
+        <button
+          onMouseEnter={() => (hovering.current = "left")}
+          onMouseLeave={() => (hovering.current = null)}>Left</button>
+        
+        <button
+          onMouseEnter={() => (hovering.current = "right")}
+          onMouseLeave={() => (hovering.current = null)}>Right</button>
+        
         <label>Score:</label>
       </div>
   </>
