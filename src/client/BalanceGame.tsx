@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useCallback, useRef } from 'react';
-
+import sprite from '/assets/test-sprite.png';
 
 export const BalanceGame: React.FC = () => {
   
@@ -96,6 +96,17 @@ export const BalanceGame: React.FC = () => {
         <div>Status: {status}</div>
       </div>
     
+      <div
+        className="sprite"
+        style={{
+          width: "64px",
+          height: "64px",
+          backgroundImage: 'url(' + sprite + ')',
+          backgroundPosition: getSpritePosition(balance),
+          backgroundSize: "640px 640px"
+        }}
+      ></div>
+      
     </div>
   </>
 }
