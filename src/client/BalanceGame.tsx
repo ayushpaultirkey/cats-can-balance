@@ -79,7 +79,7 @@ export const BalanceGame: React.FC = () => {
   };
   
   return (<>
-      <div className='flex flex-col justify-center items-center bg-zinc-600 text-gray-100'>
+      <div className='h-full w-full flex flex-col justify-center items-center bg-zinc-600 text-gray-100'>
         <div className='border-2 border-red-500 min-w-3xs space-y-3'>
           <div>
             <label>Cats can balance !</label>
