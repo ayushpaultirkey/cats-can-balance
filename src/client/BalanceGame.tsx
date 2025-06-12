@@ -71,19 +71,23 @@ export const BalanceGame: React.FC = () => {
   }, []);
   
   return <>
+    <div>
+      
+      <label>Cats can balance</label>
+        
+      <div
+        onMouseEnter={() => (hoverRef.current = "left")}
+        onMouseLeave={() => (hoverRef.current = null)}>Left</div>
+    
+      <div
+        onMouseEnter={() => (hoverRef.current = "right")}
+        onMouseLeave={() => (hoverRef.current = null)}>Right</div>
+
       <div>
-        <label>Cats can balance</label>
-        
-        <div
-          onMouseEnter={() => (hoverRef.current = "left")}
-          onMouseLeave={() => (hoverRef.current = null)}>Left</div>
-        
-        <div
-          onMouseEnter={() => (hoverRef.current = "right")}
-          onMouseLeave={() => (hoverRef.current = null)}>Right</div>
-        
         <label>Score: {Math.round(balance)}</label>
         <label>Status: {status}</label>
       </div>
+    
+    </div>
   </>
 }
