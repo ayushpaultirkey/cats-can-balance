@@ -78,35 +78,44 @@ export const BalanceGame: React.FC = () => {
     return `${x}px ${y}px`;
   };
   
-  return <>
-    <div>
-      
-      <label>Cats can balance</label>
-        
-      <div
-        onMouseEnter={() => (hoverRef.current = "left")}
-        onMouseLeave={() => (hoverRef.current = null)}>Left</div>
-    
-      <div
-        onMouseEnter={() => (hoverRef.current = "right")}
-        onMouseLeave={() => (hoverRef.current = null)}>Right</div>
+  return (<>
+      <div className='flex flex-col justify-center items-center bg-zinc-600 text-gray-100'>
+        <div className='border-2 border-red-500 min-w-3xs space-y-3'>
+          <div>
+            <label>Cats can balance !</label>
+          </div>
+          
+          <div className='flex justify-center'>
+            <div
+              className='border-2 border-red-500'
+              style={{
+                width: '64px',
+                height: '64px',
+                backgroundImage: 'url(' + sprite + ')',
+                backgroundPosition: getSpritePosition(balance),
+                backgroundSize: '640px 640px'
+              }}
+            ></div>
+          </div>
 
-      <div>
-        <div>Score: {Math.round(balance)}</div>
-        <div>Status: {status}</div>
+          <div className='flex flex-row'>
+            <div
+              className='w-full text-center bg-zinc-900'
+              onMouseEnter={() => (hoverRef.current = 'left')}
+              onMouseLeave={() => (hoverRef.current = null)}>Left</div>
+            
+            <div
+              className='w-full text-center bg-zinc-900'
+              onMouseEnter={() => (hoverRef.current = 'right')}
+              onMouseLeave={() => (hoverRef.current = null)}>Right</div>
+          </div>
+          
+          <div>
+            <div className='text-xs'>Index: {Math.round(balance)}</div>
+            <div>{status}</div>
+          </div>
+
+        </div>
       </div>
-    
-      <div
-        className="sprite"
-        style={{
-          width: "64px",
-          height: "64px",
-          backgroundImage: 'url(' + sprite + ')',
-          backgroundPosition: getSpritePosition(balance),
-          backgroundSize: "640px 640px"
-        }}
-      ></div>
-      
-    </div>
-  </>
+  </>)
 }
