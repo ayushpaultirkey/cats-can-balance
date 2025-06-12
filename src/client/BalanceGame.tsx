@@ -49,9 +49,8 @@ export const BalanceGame: React.FC = () => {
     if (nextBalance < 0 || nextBalance > 100) {
       setBalance(50);
       setStatus("💀 You lost balance!");
-      setStatusColor("red");
       lastTime.current = currentTime;
-      return;
+      //return;
     } else {
       setBalance(nextBalance);
       updateStatus(nextBalance);
