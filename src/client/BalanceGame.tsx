@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useCallback, useRef } from 'react';
+import testSprite from 'assets/sprite.png'
 
 
 export const BalanceGame: React.FC = () => {
@@ -6,10 +7,9 @@ export const BalanceGame: React.FC = () => {
   const [balance, setBalance] = useState(50);
   const [status, setStatus] = useState("Perfectly Balanced");
 
-  const balanceRef = useRef<number>(50);
-  const hoverRef = useRef<"left" | "right" | null>(null);
-  const timeRef = useRef<number>(performance.now());
-  const animationRef = useRef<number>();
+  const hovering = useRef<"left" | "right" | null>(null);
+  const lastTime = useRef<number>(performance.now());
+  const animationFrame = useRef<number>();
 
   const getDriftSpeed = (diff: number) => {
     return 0.2 + diff * 0.01;
@@ -26,10 +26,10 @@ export const BalanceGame: React.FC = () => {
   };
 
   const gameLoop = (currentTime: number) => {
-    const delta = (currentTime - timeRef.current) / 1000;
-    timeRef.current = currentTime;
+    const delta = (currentTime - lastTime.current) / 1000;
+    lastTime.current = currentTime;
 
-    let nextBalance = balanceRef.current;
+    let nextBalance = balance;
     const diff = Math.abs(nextBalance - 50);
     const drift = getDriftSpeed(diff) * delta * 30;
 
@@ -44,50 +44,68 @@ export const BalanceGame: React.FC = () => {
     }
 
     const hoverForce = 10 * delta;
-    if (hoverRef.current === "left") nextBalance -= hoverForce;
-    if (hoverRef.current === "right") nextBalance += hoverForce;
+    if (hovering.current === "left") nextBalance -= hoverForce;
+    if (hovering.current === "right") nextBalance += hoverForce;
 
     if (nextBalance < 0 || nextBalance > 100) {
-      nextBalance = 50;
-      setStatus("You lost balance!");
-      
-      timeRef.current = currentTime;
+      setBalance(50);
+      setStatus("💀 You lost balance!");
+      lastTime.current = currentTime;
+      //return;
     } else {
+      setBalance(nextBalance);
       updateStatus(nextBalance);
     }
 
-    balanceRef.current = nextBalance;
-    setBalance(nextBalance);
-
-    console.log("running", nextBalance, status);
-    animationRef.current = requestAnimationFrame(gameLoop);
+    animationFrame.current = requestAnimationFrame(gameLoop);
+  };
+  
+  const getSpritePosition = (balance) => {
+    const frame = Math.min(99, Math.max(0, Math.floor(balance)));
+    const col = frame % 10;
+    const row = Math.floor(frame / 10);
+    const x = -col * 64;
+    const y = -row * 64;
+    return `${x}px ${y}px`;
   };
   
   useEffect(() => {
-    animationRef.current = requestAnimationFrame(gameLoop);
+    console.log("started");
+    animationFrame.current = requestAnimationFrame(gameLoop);
     return () => {
-      if (animationRef.current) cancelAnimationFrame(animationRef.current);
+      console.log("end");
+      if (animationFrame.current) cancelAnimationFrame(animationFrame.current);
     };
   }, []);
   
   return <>
-    <div>
-      
-      <label>Cats can balance</label>
-        
-      <div
-        onMouseEnter={() => (hoverRef.current = "left")}
-        onMouseLeave={() => (hoverRef.current = null)}>Left</div>
-    
-      <div
-        onMouseEnter={() => (hoverRef.current = "right")}
-        onMouseLeave={() => (hoverRef.current = null)}>Right</div>
-
       <div>
-        <label>Score: {Math.round(balance)}</label>
-        <label>Status: {status}</label>
+        <label>Cats can balance</label>
+        
+        <div
+          onMouseEnter={() => (hovering.current = "left")}
+          onMouseLeave={() => (hovering.current = null)}>Left</div>
+        
+        <div
+          onMouseEnter={() => (hovering.current = "right")}
+          onMouseLeave={() => (hovering.current = null)}>Right</div>
+        
+        <div>
+          <div>Score: {Math.round(balance)}</div>
+          <div>Status: {status}</div>
+        </div>
+        
+        <div
+          className="sprite"
+          style={{
+            width: "64px",
+            height: "64px",
+            backgroundImage: 'url(' + sprite + ')',
+            backgroundPosition: getSpritePosition(balance),
+            backgroundSize: "640px 640px" // 10x64 by 10x64 if sprite is 64px/frame
+          }}
+        />
+        
       </div>
-    
-    </div>
   </>
 }
