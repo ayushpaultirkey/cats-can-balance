@@ -79,7 +79,8 @@ export const BalanceGame: React.FC = () => {
           onMouseEnter={() => (hovering.current = "right")}
           onMouseLeave={() => (hovering.current = null)}>Right</button>
         
-        <label>Score:</label>
+        <label>Score: {Math.round(balance)}</label>
+        <label>Status: {status}</label>
       </div>
   </>
 }
