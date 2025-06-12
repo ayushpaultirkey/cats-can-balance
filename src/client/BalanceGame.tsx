@@ -100,7 +100,7 @@ export const BalanceGame: React.FC = () => {
           style={{
             width: "64px",
             height: "64px",
-            backgroundImage: 'url(' + sprite + ')',
+            backgroundImage: 'url(' + testSprite + ')',
             backgroundPosition: getSpritePosition(balance),
             backgroundSize: "640px 640px" // 10x64 by 10x64 if sprite is 64px/frame
           }}
