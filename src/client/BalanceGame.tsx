@@ -69,18 +69,20 @@ export const BalanceGame: React.FC = () => {
   };
   
   const startGame = () => {
-    if (isGameRunning) return;
+		if (isGameRunning) {
+			return;
+		}
 
-    setIsGameRunning(true);
-    balanceRef.current = 50;
-    setBalance(50);
-    scoreRef.current = 0;
-    setScore(0);
+		setIsGameRunning(true);
+		setBalance(50);
+		setScore(0);
+		startScore();
 
-    scoreHandler();
+		balanceRef.current = 50;
+		scoreRef.current = 0;
+		timeRef.current = performance.now();
+		animationRef.current = requestAnimationFrame(gameLoop);
     
-    timeRef.current = performance.now();
-    animationRef.current = requestAnimationFrame(gameLoop);
   }
   
   const scoreHandler = () => {
