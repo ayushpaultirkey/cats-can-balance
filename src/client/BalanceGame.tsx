@@ -149,6 +149,11 @@ export const BalanceGame: React.FC = () => {
             <div className='text-xs'>Index: {Math.round(balance)}</div>
           </div>
 
+          <div>
+            <div className='text-xs'>Index: {Math.round(balance)}</div>
+            <div>Score: {score}</div>
+          </div>
+          
         </div>
       </div>
   </>)
