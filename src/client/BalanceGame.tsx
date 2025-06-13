@@ -11,7 +11,9 @@ export const BalanceGame: React.FC = () => {
   const hoverRef = useRef<"left" | "right" | null>(null);
   const timeRef = useRef<number>(performance.now());
   const animationRef = useRef<number>();
-
+  const scoreTimerRef = useRef<number>();
+  const scoreRef = useRef(score);
+  
 
   const getDriftSpeed = (diff: number) => {
     return 0.2 + diff * 0.01;
@@ -51,8 +53,13 @@ export const BalanceGame: React.FC = () => {
 
     if (nextBalance < 0 || nextBalance > 100) {
       nextBalance = 50;
-      
       timeRef.current = currentTime;
+
+      setGameRunning(false);
+      cancelAnimationFrame(animationRef.current);
+      clearInterval(scoreTimerRef.current);
+      
+      return;
     }
 
     balanceRef.current = nextBalance;
@@ -61,8 +68,23 @@ export const BalanceGame: React.FC = () => {
     animationRef.current = requestAnimationFrame(gameLoop);
   };
   
-  useEffect(() => {
+  const startGame = () => {
+    if (gameRunning) return;
+
+    setGameRunning(true);
+    balanceRef.current = 50;
+    setBalance(50);
+    scoreRef.current = 0;
+    setScore(0);
+
+    scoreHandler();
+    
+    lastTimeRef.current = performance.now();
     animationRef.current = requestAnimationFrame(gameLoop);
+  }
+  
+  useEffect(() => {
+    //animationRef.current = requestAnimationFrame(gameLoop);
     return () => {
       if (animationRef.current) cancelAnimationFrame(animationRef.current);
     };
@@ -84,6 +106,12 @@ export const BalanceGame: React.FC = () => {
             <label>Cats can balance !</label>
           </div>
           
+          <div>
+            <button
+              className={ `border-2 border-red-500 ${gameRunning ? 'hidden' : ''}` }
+              onClick={startGame}>Start Game</button>
+          </div>
+          
           <div className='flex justify-center'>
             <div
               className='border-2 border-red-500'
@@ -93,8 +121,7 @@ export const BalanceGame: React.FC = () => {
                 backgroundImage: 'url(' + sprite + ')',
                 backgroundPosition: getSpritePosition(balance),
                 backgroundSize: '1280px 1280px'
-              }}
-            ></div>
+              }}></div>
           </div>
 
           <div className='flex flex-row'>
