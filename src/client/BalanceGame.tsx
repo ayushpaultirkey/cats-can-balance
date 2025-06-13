@@ -83,6 +83,15 @@ export const BalanceGame: React.FC = () => {
     animationRef.current = requestAnimationFrame(gameLoop);
   }
   
+  const scoreHandler = () => {
+    clearInterval(scoreTimerRef.current);
+
+    scoreTimerRef.current = setInterval(() => {
+      scoreRef.current++;
+      setScore(scoreRef.current);
+    }, 1000);
+  }
+  
   useEffect(() => {
     //animationRef.current = requestAnimationFrame(gameLoop);
     return () => {
