@@ -9,8 +9,10 @@ export const BalanceGame: React.FC = () => {
 
   const balanceRef = useRef<number>(50);
   const hoverRef = useRef<"left" | "right" | null>(null);
-  const timeRef = useRef<number>(performance.now());
+  
   const animationRef = useRef<number>();
+  const animationTimeRef = useRef<number>(performance.now());
+  
   const scoreTimerRef = useRef<number>();
   const scoreRef = useRef(score);
   
@@ -20,8 +22,8 @@ export const BalanceGame: React.FC = () => {
   };
   
   const gameLoop = (currentTime: number) => {
-    const delta = (currentTime - timeRef.current) / 1000;
-    timeRef.current = currentTime;
+    const delta = (currentTime - animationTimeRef.current) / 1000;
+    animationTimeRef.current = currentTime;
 
     let nextBalance = balanceRef.current;
     const diff = Math.abs(nextBalance - 50);
@@ -48,7 +50,7 @@ export const BalanceGame: React.FC = () => {
 
     if (nextBalance < 0 || nextBalance > 100) {
       nextBalance = 50;
-      timeRef.current = currentTime;
+      animationTimeRef.current = currentTime;
 
       setIsGameRunning(false);
       cancelAnimationFrame(animationRef.current);
@@ -75,12 +77,11 @@ export const BalanceGame: React.FC = () => {
 
 		balanceRef.current = 50;
 		scoreRef.current = 0;
-		timeRef.current = performance.now();
+		animationTimeRef.current = performance.now();
 		animationRef.current = requestAnimationFrame(gameLoop);
-    
   }
   
-  const scoreHandler = () => {
+  const startScore = () => {
     clearInterval(scoreTimerRef.current);
 
     scoreTimerRef.current = setInterval(() => {
