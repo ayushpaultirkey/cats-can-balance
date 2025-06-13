@@ -4,12 +4,14 @@ import sprite from '/assets/test-sprite.png';
 export const BalanceGame: React.FC = () => {
   
   const [balance, setBalance] = useState(50);
-  const [status, setStatus] = useState("Perfectly Balanced");
+  const [score, setScore] = useState(0);
+  const [gameRunning, setGameRunning] = useState(false);
 
   const balanceRef = useRef<number>(50);
   const hoverRef = useRef<"left" | "right" | null>(null);
   const timeRef = useRef<number>(performance.now());
   const animationRef = useRef<number>();
+
 
   const getDriftSpeed = (diff: number) => {
     return 0.2 + diff * 0.01;
@@ -43,17 +45,14 @@ export const BalanceGame: React.FC = () => {
       nextBalance += drift;
     }
 
-    const hoverForce = 10 * delta;
+    const hoverForce = 15 * delta;
     if (hoverRef.current === "left") nextBalance -= hoverForce;
     if (hoverRef.current === "right") nextBalance += hoverForce;
 
     if (nextBalance < 0 || nextBalance > 100) {
       nextBalance = 50;
-      setStatus("You lost balance!");
       
       timeRef.current = currentTime;
-    } else {
-      updateStatus(nextBalance);
     }
 
     balanceRef.current = nextBalance;
@@ -73,8 +72,8 @@ export const BalanceGame: React.FC = () => {
     const frame = Math.min(99, Math.max(0, Math.floor(balance)));
     const col = frame % 10;
     const row = Math.floor(frame / 10);
-    const x = -col * 64;
-    const y = -row * 64;
+    const x = -col * 128;
+    const y = -row * 128;
     return `${x}px ${y}px`;
   };
   
@@ -89,11 +88,11 @@ export const BalanceGame: React.FC = () => {
             <div
               className='border-2 border-red-500'
               style={{
-                width: '64px',
-                height: '64px',
+                width: '128px',
+                height: '128px',
                 backgroundImage: 'url(' + sprite + ')',
                 backgroundPosition: getSpritePosition(balance),
-                backgroundSize: '640px 640px'
+                backgroundSize: '1280px 1280px'
               }}
             ></div>
           </div>
@@ -112,7 +111,6 @@ export const BalanceGame: React.FC = () => {
           
           <div>
             <div className='text-xs'>Index: {Math.round(balance)}</div>
-            <div>{status}</div>
           </div>
 
         </div>
