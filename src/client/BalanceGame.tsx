@@ -5,7 +5,7 @@ export const BalanceGame: React.FC = () => {
   
   const [balance, setBalance] = useState(50);
   const [score, setScore] = useState(0);
-  const [gameRunning, setGameRunning] = useState(false);
+  const [isGameRunning, setIsGameRunning] = useState(false);
 
   const balanceRef = useRef<number>(50);
   const hoverRef = useRef<"left" | "right" | null>(null);
@@ -55,7 +55,7 @@ export const BalanceGame: React.FC = () => {
       nextBalance = 50;
       timeRef.current = currentTime;
 
-      setGameRunning(false);
+      setIsGameRunning(false);
       cancelAnimationFrame(animationRef.current);
       clearInterval(scoreTimerRef.current);
       
@@ -69,9 +69,9 @@ export const BalanceGame: React.FC = () => {
   };
   
   const startGame = () => {
-    if (gameRunning) return;
+    if (isGameRunning) return;
 
-    setGameRunning(true);
+    setIsGameRunning(true);
     balanceRef.current = 50;
     setBalance(50);
     scoreRef.current = 0;
