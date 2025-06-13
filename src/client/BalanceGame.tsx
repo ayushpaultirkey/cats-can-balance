@@ -125,8 +125,10 @@ export const BalanceGame: React.FC = () => {
 							className='bg-amber-600 disabled:opacity-20 cursor-pointer'
 							disabled={isGameRunning}
 							onClick={startGame}>Start</button>
-						<p>Score:</p>
-						<p className='absolute left-full p-0!'>{score}</p>
+						<div className='flex flex-row relative'>
+							<p>Score:</p>
+							<p className='absolute sm:left-full sm:top-0 left-3 top-full p-0!'>{score}</p>
+						</div>
 					</li>
 				</ul>
 
