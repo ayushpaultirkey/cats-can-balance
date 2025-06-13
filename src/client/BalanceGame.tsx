@@ -8,13 +8,13 @@ export const BalanceGame: React.FC = () => {
   const [isGameRunning, setIsGameRunning] = useState(false);
 
   const balanceRef = useRef<number>(50);
-  const hoverRef = useRef<"left" | "right" | null>(null);
+  const directionRef = useRef<"left" | "right" | null>(null);
   
   const animationRef = useRef<number>();
   const animationTimeRef = useRef<number>(performance.now());
   
+  const scoreRef = useRef<number>(score);
   const scoreTimerRef = useRef<number>();
-  const scoreRef = useRef(score);
   
 
   const getDriftSpeed = (diff: number) => {
@@ -41,10 +41,10 @@ export const BalanceGame: React.FC = () => {
 		}
 
     const hoverForce = 15 * delta;
-		if (hoverRef.current === 'left') {
+		if (directionRef.current === 'left') {
 			nextBalance -= hoverForce;
 		}
-		if (hoverRef.current === 'right') {
+		if (directionRef.current === 'right') {
 			nextBalance += hoverForce;
 		}
 
@@ -146,14 +146,14 @@ export const BalanceGame: React.FC = () => {
 					<button
 						className='w-full text-center py-3 text-amber-600 border-t-4 border-r-4 border-amber-600 font-bold cursor-pointer disabled:opacity-0 disabled:pointer-events-none'
 						disabled={!isGameRunning}
-						onMouseEnter={() => (hoverRef.current = 'left')}
-						onMouseLeave={() => (hoverRef.current = null)}>&#11207;</button>
+						onMouseEnter={() => (directionRef.current = 'left')}
+						onMouseLeave={() => (directionRef.current = null)}>&#11207;</button>
 
 					<button
 						className='w-full text-center py-3 text-amber-600 border-t-4 border-amber-600 font-bold cursor-pointer disabled:opacity-0  disabled:pointer-events-none'
 						disabled={!isGameRunning}
-						onMouseEnter={() => (hoverRef.current = 'right')}
-						onMouseLeave={() => (hoverRef.current = null)}>&#11208;</button>
+						onMouseEnter={() => (directionRef.current = 'right')}
+						onMouseLeave={() => (directionRef.current = null)}>&#11208;</button>
 				</div>
 
 			</div>
