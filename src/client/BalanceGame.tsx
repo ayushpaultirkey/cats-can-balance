@@ -79,7 +79,7 @@ export const BalanceGame: React.FC = () => {
 
     scoreHandler();
     
-    lastTimeRef.current = performance.now();
+    timeRef.current = performance.now();
     animationRef.current = requestAnimationFrame(gameLoop);
   }
   
