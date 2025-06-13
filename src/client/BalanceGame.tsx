@@ -109,51 +109,56 @@ export const BalanceGame: React.FC = () => {
   };
   
   return (<>
-      <div className='h-full w-full flex flex-col justify-center items-center'>
-        <div className='border-2 border-red-500 min-w-3xs space-y-3'>
-          <div>
-            <label>Cats can balance !</label>
-          </div>
-          
-          <div>
-            <button
-              className={ `border-2 border-red-500 ${gameRunning ? 'hidden' : ''}` }
-              onClick={startGame}>Start Game</button>
-          </div>
-          
-          <div className='flex justify-center'>
-            <div
-              className='border-2 border-red-500'
-              style={{
-                width: '128px',
-                height: '128px',
-                backgroundImage: 'url(' + sprite + ')',
-                backgroundPosition: getSpritePosition(balance),
-                backgroundSize: '1280px 1280px'
-              }}></div>
-          </div>
+		<div className='h-full flex flex-col justify-center items-center bg-zinc-900 text-zinc-200 select-none'>
+			<div className='border-8 border-amber-600 rounded-md min-w-96'>
 
-          <div className='flex flex-row'>
-            <div
-              className='w-full text-center bg-zinc-900'
-              onMouseEnter={() => (hoverRef.current = 'left')}
-              onMouseLeave={() => (hoverRef.current = null)}>Left</div>
-            
-            <div
-              className='w-full text-center bg-zinc-900'
-              onMouseEnter={() => (hoverRef.current = 'right')}
-              onMouseLeave={() => (hoverRef.current = null)}>Right</div>
-          </div>
-          
-          <div>
-            <div className='text-xs'>Index: {Math.round(balance)}</div>
-          </div>
+				<ul className="words">
+					<li>
+						<p>Cats</p>
+					</li>
+					<li>
+						<p>Can</p>
+					</li>
+					<li>
+						<p>Balance !</p>
+					</li>
+					<li className='flex flex-row'>
+						<button
+							className='bg-amber-600 disabled:opacity-20 cursor-pointer'
+							disabled={isGameRunning}
+							onClick={startGame}>Start</button>
+						<p>Score:</p>
+						<p className='absolute left-full p-0!'>{score}</p>
+					</li>
+				</ul>
 
-          <div>
-            <div>Score: {score}</div>
-          </div>
-          
-        </div>
-      </div>
+				<div className='flex justify-center'>
+					<div
+						style={{
+							width: '128px',
+							height: '128px',
+							backgroundImage: 'url(' + sprite + ')',
+							backgroundPosition: getSpritePosition(balance),
+							backgroundSize: '1280px 1280px',
+							imageRendering: 'pixelated'
+						}}></div>
+				</div>
+
+				<div className='flex flex-row'>
+					<button
+						className='w-full text-center py-3 text-amber-600 border-t-4 border-r-4 border-amber-600 font-bold cursor-pointer disabled:opacity-0 disabled:pointer-events-none'
+						disabled={!isGameRunning}
+						onMouseEnter={() => (hoverRef.current = 'left')}
+						onMouseLeave={() => (hoverRef.current = null)}>&#11207;</button>
+
+					<button
+						className='w-full text-center py-3 text-amber-600 border-t-4 border-amber-600 font-bold cursor-pointer disabled:opacity-0  disabled:pointer-events-none'
+						disabled={!isGameRunning}
+						onMouseEnter={() => (hoverRef.current = 'right')}
+						onMouseLeave={() => (hoverRef.current = null)}>&#11208;</button>
+				</div>
+
+			</div>
+		</div>
   </>)
 }
