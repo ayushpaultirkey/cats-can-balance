@@ -53,8 +53,8 @@ export const Game: React.FC = () => {
       animationTimeRef.current = currentTime;
 
       setIsGameRunning(false);
-      cancelAnimationFrame(animationRef.current);
       clearInterval(scoreTimerRef.current);
+      cancelAnimationFrame(animationRef.current);
       
       return;
     }
