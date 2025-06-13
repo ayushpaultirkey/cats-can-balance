@@ -19,16 +19,6 @@ export const BalanceGame: React.FC = () => {
     return 0.2 + diff * 0.01;
   };
   
-  const updateStatus = (val: number) => {
-    if (Math.round(val) === 50) {
-      setStatus("Perfectly Balanced");
-    } else if (val < 50) {
-      setStatus("Falling Left");
-    } else {
-      setStatus("Falling Right");
-    }
-  };
-
   const gameLoop = (currentTime: number) => {
     const delta = (currentTime - timeRef.current) / 1000;
     timeRef.current = currentTime;
@@ -41,15 +31,20 @@ export const BalanceGame: React.FC = () => {
       nextBalance += Math.random() < 0.5 ? -0.1 : 0.1;
     }
     
-    if (nextBalance < 50) {
-      nextBalance -= drift;
-    } else if (nextBalance > 50) {
-      nextBalance += drift;
-    }
+		if (nextBalance < 50) {
+			nextBalance -= drift;
+		}
+		else if (nextBalance > 50) {
+			nextBalance += drift;
+		}
 
     const hoverForce = 15 * delta;
-    if (hoverRef.current === "left") nextBalance -= hoverForce;
-    if (hoverRef.current === "right") nextBalance += hoverForce;
+		if (hoverRef.current === 'left') {
+			nextBalance -= hoverForce;
+		}
+		if (hoverRef.current === 'right') {
+			nextBalance += hoverForce;
+		}
 
     if (nextBalance < 0 || nextBalance > 100) {
       nextBalance = 50;
@@ -89,15 +84,15 @@ export const BalanceGame: React.FC = () => {
     clearInterval(scoreTimerRef.current);
 
     scoreTimerRef.current = setInterval(() => {
-      scoreRef.current++;
-      setScore(scoreRef.current);
+			setScore(scoreRef.current++);
     }, 1000);
   }
   
   useEffect(() => {
-    //animationRef.current = requestAnimationFrame(gameLoop);
     return () => {
-      if (animationRef.current) cancelAnimationFrame(animationRef.current);
+			if (animationRef.current) {
+				cancelAnimationFrame(animationRef.current);
+			}
     };
   }, []);
   
