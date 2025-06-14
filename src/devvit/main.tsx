@@ -147,7 +147,7 @@ Devvit.addCustomPostType({
       <zstack grow alignment='middle center' padding='small'>
         <vstack grow alignment='middle' gap='small'>
           <hstack alignment='middle center' gap='medium'>
-            <text size='xxlarge'>Leaderboard</text>
+            <text size='xxlarge' style='heading'>Leaderboard</text>
             <image url='cat-idle.gif' imageWidth={64} imageHeight={64} />
           </hstack>
           <text alignment='center'>Your Score: {score}</text>
