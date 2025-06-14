@@ -56,7 +56,7 @@ export const Game: React.FC = () => {
             clearInterval(scoreTimerRef.current);
             cancelAnimationFrame(animationRef.current);
 
-            window.parent?.postMessage('setScore', { type: 'setScore'; data: { newScore: scoreRef.current } });
+            window.parent?.postMessage({ type: 'setScore'; data: { newScore: scoreRef.current } }, "*");
             return;
         }
 
