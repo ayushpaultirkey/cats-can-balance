@@ -89,6 +89,14 @@ Devvit.addCustomPostType({
     
     const webView = useWebView<WebViewMessage, DevvitMessage>({
       url: 'index.html',
+      async onMessage(message, webView) {
+        switch (message.type) {
+          case 'setScore':
+            await context.redis.set(`counter_${context.postId}`, message.data.newCounter.toString());
+            setCounter(message.data.newCounter);
+            break;
+        }
+      },
     });
 
     return (
