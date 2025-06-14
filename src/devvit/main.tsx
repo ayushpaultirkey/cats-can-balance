@@ -144,7 +144,7 @@ Devvit.addCustomPostType({
             ))}
           </vstack>
           <vstack alignment='middle center'>
-            <button>Start App</button>
+            <button onPress={() => webView.mount()}>Start App</button>
           </vstack>
         </vstack>
       </zstack>
