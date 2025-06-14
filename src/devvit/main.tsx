@@ -89,7 +89,7 @@ Devvit.addCustomPostType({
 
     const [highscores, setHighscores] = useState(async () => {
       const scores = await context.redis.hGetAll('score');
-      const entries = Object.entries(record).map(([user, score]) => ({
+      const entries = Object.entries(scores).map(([user, score]) => ({
         user,
         score: Number(score),
       }));
