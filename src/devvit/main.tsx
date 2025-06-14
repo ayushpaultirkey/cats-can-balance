@@ -98,6 +98,19 @@ Devvit.addCustomPostType({
       async onMessage(message, webView) {
         switch (message.type) {
           case 'setScore':
+            
+            try {
+              const userId = await context.reddit.getCurrentUsername();
+              const newScore = Number(message.data.newScore);
+              await context.redis.zAdd(
+                'scores',
+                { member: 'userId', score: newScore },
+              );
+              
+            } catch (error) {
+              
+            }
+            
             // const key = 'scores';
             // const userId = await context.reddit.getCurrentUsername();
             // if(userId) {
