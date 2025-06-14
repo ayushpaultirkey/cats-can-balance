@@ -95,7 +95,7 @@ Devvit.addCustomPostType({
       }));
       entries.sort((a, b) => b.score - a.score);
       return entries.slice(0, 10);
-    ]});
+    });
     
     const webView = useWebView<WebViewMessage, DevvitMessage>({
       url: 'index.html',
@@ -126,6 +126,11 @@ Devvit.addCustomPostType({
           <text weight='bold'>
             Highscore: { score ?? '0' }
           </text>
+          {highscores.map((entry, index) => (
+            <text>
+              {entry.user}: {entry.score}
+            </text>
+          ))}
           <button onPress={() => webView.mount()}>Start App</button>
         </vstack>
       </vstack>
