@@ -85,7 +85,7 @@ Devvit.addCustomPostType({
     return (
       <vstack grow padding="small">
         <vstack grow alignment="middle center">
-          <button onPress={() => webView.mount()}>Launch App</button>
+          <button onPress={() => webView.mount()}>Start App</button>
         </vstack>
       </vstack>
     );
