@@ -86,7 +86,7 @@ Devvit.addCustomPostType({
       const userId = await context.reddit.getCurrentUsername();
       const hashKey = "scores";
       
-      const currentScore = await context.redis.hGet(hashKey, userId);
+      const currentScore = await context.redis.zScore(userId, hashKey);
       return Number(currentScore ?? 0);
     });
     
