@@ -86,7 +86,7 @@ Devvit.addCustomPostType({
       const userId = context.reddit.getCurrentUsername();
       const dataId = `score_${userId}`;
       
-      const currentScore = await context.redis.get(dataId);
+      const currentScore = await context.redis.hGet(dataId);
       return Number(currentScore ?? 0);
     });
     
@@ -102,7 +102,7 @@ Devvit.addCustomPostType({
             const newScore = Number(message.data.newScore);
             
             if (!oldScore || newScore > oldScore) {
-              await context.redis.set(dataId, newScore.toString());
+              await context.redis.hSet(dataId, newScore.toString());
               setScore(newScore);
             }
       
