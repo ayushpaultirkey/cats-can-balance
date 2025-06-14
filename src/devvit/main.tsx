@@ -127,7 +127,7 @@ Devvit.addCustomPostType({
     return (
       <zstack grow alignment='middle center' padding='small'>
         <vstack alignment='top end' width='100%' height='100%'>
-          <image url='bolt.png' imageWidth={64} imageHeight={64} onPress={ () => {
+          <image url='bolt.png' imageWidth={128} imageHeight={128} onPress={ () => {
             const url = 'https://bolt.new/';
             context.ui.navigateTo(url);
           }} />
@@ -135,7 +135,7 @@ Devvit.addCustomPostType({
         <vstack grow alignment='middle' gap='small'>
           <text alignment='center' size='xxlarge'>Leaderboard</text>
           <text alignment='center'>Your Score: 0</text>
-          <vstack>
+          <vstack alignment='center'>
             {highscores.map((entry, index) => (
               <text size='small'>
                 u/{entry.user}: {entry.score}
