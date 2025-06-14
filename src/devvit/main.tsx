@@ -83,7 +83,8 @@ Devvit.addCustomPostType({
     });
     
     const [score, setScore] = useState(async () => {
-      const currentScore = await context.redis.zScore('scores', username);
+     // const currentScore = await context.redis.zScore('scores', username);
+      const currentScore = 0;
       return Number(currentScore ?? 0);
     });
     
