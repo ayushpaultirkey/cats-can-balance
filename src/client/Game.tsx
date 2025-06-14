@@ -109,13 +109,14 @@ export const Game: React.FC = () => {
             <div className="h-full flex flex-col justify-center items-center bg-zinc-900 text-zinc-200 select-none">
                 <div className="border-8 border-amber-600 rounded-md min-w-96 relative">
             				<div className="absolute top-2 right-2 sm:-top-5 sm:-right-5">
-            					  <a href="https://bolt.new/" target="_blank" rel="noopener noreferrer">
-            						    <img
-            							      src={boltLogo}
-            							      alt="Bolt.new badge"
-            							      className="w-16 h-16 sm:w-20 sm:h-20"
-            						    />
-            					  </a>
+                        <img
+                            src={boltLogo}
+                            alt="Bolt.new"
+                            className="w-16 h-16 sm:w-20 sm:h-20 cursor-pointer"
+                            onClick={() => {
+                                window.open('https://bolt.new/', '_blank');
+                            }}
+                        />
             				</div>
                   
                     <ul className="words">
