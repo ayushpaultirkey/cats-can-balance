@@ -83,8 +83,13 @@ Devvit.addCustomPostType({
     });
     
     const [score, setScore] = useState(async () => {
-     // const currentScore = await context.redis.zScore('scores', username);
-      const currentScore = 0;
+      let currentScore = 0;
+      try {
+        const userId = await context.reddit.getCurrentUsername();
+        currentScore = await context.redis.zScore('scores', userId);
+      } catch (error) {
+        console.error(error);
+      }
       return Number(currentScore ?? 0);
     });
     
@@ -93,21 +98,28 @@ Devvit.addCustomPostType({
       async onMessage(message, webView) {
         switch (message.type) {
           case 'setScore':
+            // const key = 'scores';
             // const userId = await context.reddit.getCurrentUsername();
-            // const key = "scores";
-            
-            // const oldScoreStr = await context.redis.zScore(key, userId);
-            // const oldScore = Number(oldScoreStr ?? 0);
-            // const newScore = Number(message.data.newScore);
-            
-            // if (!oldScore || newScore > oldScore) {
-            //   await context.redis.zAdd(key, {
-            //     score: newScore,
-            //     value: userId,
-            //   });
-            //   setScore(newScore);
+            // if(userId) {
+
+            //   const oldScore = await context.redis.zScore(key, userId);
+
+              
+            //   const newScore = Number(message.data.newScore);
+              
+            //   if (!oldScore || newScore > oldScore) {
+            //     await context.redis.zAdd(key, {
+            //       score: newScore,
+            //       value: userId,
+            //     });
+            //     setScore(newScore);
+            //   }
+              
             // }
-            // break;
+            // else {
+            //   console.log('invalid user');
+            // }
+            break;
         }
       },
     });
