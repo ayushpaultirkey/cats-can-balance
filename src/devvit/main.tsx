@@ -124,7 +124,7 @@ Devvit.addCustomPostType({
       <vstack grow padding='small'>
         <vstack grow alignment='middle center'>
           <text size='xxlarge'>
-            Leaderboard
+            Leaderboard:
           </text>
           <text>
             Your Score: { score ?? '0' }
