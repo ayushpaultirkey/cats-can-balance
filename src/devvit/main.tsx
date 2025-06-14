@@ -127,10 +127,11 @@ Devvit.addCustomPostType({
     return (
       <zstack grow alignment='middle center' padding='small'>
         <vstack alignment='top end' width='100%' height='100%'>
-          <image url='bolt.png' imageWidth={128} imageHeight={128} onPress={ () => {
-            const url = 'https://bolt.new/';
-            context.ui.navigateTo(url);
-          }} />
+          <image url='bolt.png' imageWidth={96} imageHeight={96} onPress={
+            () => {
+              const url = 'https://bolt.new/';
+              context.ui.navigateTo(url);
+            }} />
         </vstack>
         <vstack grow alignment='middle' gap='small'>
           <text alignment='center' size='xxlarge'>Leaderboard</text>
