@@ -147,7 +147,7 @@ Devvit.addCustomPostType({
       <zstack grow alignment='middle center' padding='small'>
         <vstack grow alignment='middle' gap='small'>
           <vstack alignment='middle center'>
-            <image url='cat-idle.gif' imageWidth={32} imageHeight={32} />
+            <image url='cat-idle.gif' imageWidth={64} imageHeight={64} />
             <text size='xxlarge' style='heading'>Leaderboard</text>
           </vstack>
           <vstack border='thin' borderColor='#444444' cornerRadius='small'></vstack>
