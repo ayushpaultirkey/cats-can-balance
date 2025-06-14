@@ -1,4 +1,4 @@
-import { Devvit, Post } from "@devvit/public-api";
+import { Devvit, Post, useWebView  } from "@devvit/public-api";
 
 import "../server/index";
 import { defineConfig } from "@devvit/server";
@@ -78,7 +78,7 @@ Devvit.addCustomPostType({
   name: 'Cats Post',
   height: 'tall',
   render: (context) => {
-    const webView = useWebView<WebViewMessage, DevvitMessage>({
+    const webView = useWebView({
       url: 'index.html',
     });
 
