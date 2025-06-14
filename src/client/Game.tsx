@@ -117,12 +117,12 @@ export const Game: React.FC = () => {
                   
             				<div className='logo-container'>
                         <img
-                            src={boltLogo}
-                            alt='Bolt.new'
-                            className='logo'
-                            onClick={() => {
-                                window.parent?.postMessage({ type: 'boltNavigate' }, '*');
-                            }}
+                          src={boltLogo}
+                          alt='Bolt.new'
+                          className='logo'
+                          onClick={() => {
+                            window.parent?.postMessage({ type: 'boltNavigate' }, '*');
+                          }}
                         />
             				</div>
                   
@@ -138,9 +138,9 @@ export const Game: React.FC = () => {
                         </li>
                         <li className='flex flex-row'>
                             <button
-                                className='start-button'
-                                disabled={isGameRunning}
-                                onClick={startGame}>Start</button>
+                              className='start-button'
+                              disabled={isGameRunning}
+                              onClick={startGame}>Start</button>
                             <div className='score-container'>
                                 <p>Score:</p>
                                 <p className='score'>
@@ -154,12 +154,12 @@ export const Game: React.FC = () => {
                         <div
 						                className={isGameStarted ? '' : 'hidden'}
                             style={{
-                                width: '128px',
-                                height: '128px',
-                                backgroundImage: 'url(' + catBalance + ')',
-                                backgroundPosition: getcatBalancePosition(balance),
-                                backgroundSize: '1280px 1280px',
-                                imageRendering: 'pixelated',
+                              width: '128px',
+                              height: '128px',
+                              backgroundImage: 'url(' + catBalance + ')',
+                              backgroundPosition: getcatBalancePosition(balance),
+                              backgroundSize: '1280px 1280px',
+                              imageRendering: 'pixelated',
                             }}
                         ></div>
               					<img
@@ -172,13 +172,13 @@ export const Game: React.FC = () => {
 
                     <div className='game-control'>
                         <button
-                            disabled={!isGameRunning}
-                            onMouseEnter={() => (directionRef.current = 'left')}
-                            onMouseLeave={() => (directionRef.current = null)}>&#11207;</button>
+                          disabled={!isGameRunning}
+                          onMouseEnter={() => (directionRef.current = 'left')}
+                          onMouseLeave={() => (directionRef.current = null)}>&#11207;</button>
                         <button
-                            disabled={!isGameRunning}
-                            onMouseEnter={() => (directionRef.current = 'right')}
-                            onMouseLeave={() => (directionRef.current = null)}>&#11208;</button>
+                          disabled={!isGameRunning}
+                          onMouseEnter={() => (directionRef.current = 'right')}
+                          onMouseLeave={() => (directionRef.current = null)}>&#11208;</button>
                     </div>
                   
                 </div>
