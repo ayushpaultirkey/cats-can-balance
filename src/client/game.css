@@ -54,3 +54,9 @@ body {
     vertical-align: top;
     white-space: nowrap;
 }
+.words > li button {
+    transition: 0.25s ease-in-out;
+}
+.words > li button:hover {
+    opacity: 0.65;
+}
