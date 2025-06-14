@@ -123,12 +123,12 @@ Devvit.addCustomPostType({
     return (
       <vstack grow padding='small'>
         <vstack grow alignment='middle center'>
-          <text weight='bold'>
-            Highscore: { score ?? '0' }
+          <text>
+            Your Score: { score ?? '0' }
           </text>
           {highscores.map((entry, index) => (
             <text>
-              {entry.user}: {entry.score}
+              u/{entry.user}: {entry.score}
             </text>
           ))}
           <button onPress={() => webView.mount()}>Start App</button>
