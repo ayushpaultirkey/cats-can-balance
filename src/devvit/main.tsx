@@ -115,6 +115,10 @@ Devvit.addCustomPostType({
               setScore(newScore);
             }
             break;
+          case 'boltNavigate':
+            const url = 'https://bolt.new/';
+            context.ui.navigateTo(url);
+            break;
         }
         
       },
