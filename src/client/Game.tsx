@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useCallback, useRef } from "react";
 import sprite from "/assets/test-sprite.png";
+import boltLogo from './assets/bolt.png'
 
 export const Game: React.FC = () => {
     const [balance, setBalance] = useState(50);
