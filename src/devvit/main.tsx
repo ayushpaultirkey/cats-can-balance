@@ -80,15 +80,17 @@ Devvit.addMenuItem({
     location: 'subreddit',
     forUserType: 'moderator',
     onPress: async (_event, context) => {
+        const { redis, ui } = context;
         try {
-            const scoreKeys = await context.redis.hKeys('score');
-            await Promise.all(
-              scoreKeys.map((field) => context.redis.hDel('score', field))
-            );
-            context.ui.showToast({ text: 'Score reset!' });
+            const scoreKeys = await redis.hKeys('score');
+            console.log(typeof(scoreKeys), scoreKeys);  
+            // await Promise.all(
+            //   scoreKeys.map((field) => redis.hDel('score', field))
+            // );
+            ui.showToast({ text: 'Score reset!' });
         } catch (error) {
             console.log(error);
-            context.ui.showToast({ text: 'Error while reseting scores!' });
+            ui.showToast({ text: 'Error while reseting scores!' });
         }
     },
 });
