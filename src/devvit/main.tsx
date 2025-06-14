@@ -89,6 +89,7 @@ Devvit.addMenuItem({
             await Promise.all(deletePromises);
             context.ui.showToast({ text: 'Score reset!' });
         } catch (error) {
+            console.log(error);
             context.ui.showToast({ text: 'Error while reseting scores!' });
         }
     },
