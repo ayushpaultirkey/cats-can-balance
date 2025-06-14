@@ -92,8 +92,9 @@ Devvit.addCustomPostType({
       async onMessage(message, webView) {
         switch (message.type) {
           case 'setScore':
+            console.log(score);
             await context.redis.set(`score_${context.postId}`, message.data.newScore.toString());
-            setCounter(message.data.newCounter);
+            setScore(message.data.newScore);
             break;
         }
       },
