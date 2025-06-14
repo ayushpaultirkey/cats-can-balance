@@ -86,7 +86,11 @@ Devvit.addCustomPostType({
       let currentScore = 0;
       try {
         const userId = await context.reddit.getCurrentUsername();
-        currentScore = await context.redis.zScore('scores', 'user');
+        //currentScore = await context.redis.zScore('scores', 'user');
+        await context.redis.zAdd(
+          'scores',
+          { member: 'user', score: 37 },
+        );
       } catch (error) {
         console.error(error);
       }
