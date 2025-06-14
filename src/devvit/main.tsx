@@ -42,7 +42,7 @@ export const Preview: Devvit.BlockComponent<{ text?: string }> = ({
 // TODO: Remove this when defineConfig allows webhooks before post creation
 Devvit.addMenuItem({
     // Please update as you work on your idea!
-    label: "[Cats can balance]: New Game",
+    label: "[Cats]: New Game",
     location: "subreddit",
     forUserType: "moderator",
     onPress: async (_event, context) => {
