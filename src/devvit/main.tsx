@@ -5,8 +5,8 @@ import { defineConfig } from "@devvit/server";
 
 defineConfig({
     name: "Cats can balance",
-    entry: "index.html",
-    height: "tall",
+    //entry: "index.html",
+    //height: "tall",
     menu: { enable: false },
 });
 
@@ -71,5 +71,26 @@ Devvit.addMenuItem({
         }
     },
 });
+
+
+
+Devvit.addCustomPostType({
+  name: 'Cats Post',
+  height: 'tall',
+  render: (context) => {
+    const webView = useWebView<WebViewMessage, DevvitMessage>({
+      url: 'index.html',
+    });
+
+    return (
+      <vstack grow padding="small">
+        <vstack grow alignment="middle center">
+          <button onPress={() => webView.mount()}>Launch App</button>
+        </vstack>
+      </vstack>
+    );
+  },
+});
+
 
 export default Devvit;
