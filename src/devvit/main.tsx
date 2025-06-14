@@ -72,12 +72,20 @@ Devvit.addMenuItem({
     },
 });
 
-
-
 Devvit.addCustomPostType({
   name: 'Cats Post',
   height: 'tall',
   render: (context) => {
+    
+    const [username] = useState(async () => {
+      return (await context.reddit.getCurrentUsername()) ?? 'anon';
+    });
+    
+    const [score, setScore] = useState(async () => {
+      const redisScore = await context.redis.get(`score_${context.postId}`);
+      return Number(redisScore ?? 0);
+    });
+    
     const webView = useWebView({
       url: 'index.html',
     });
@@ -85,6 +93,9 @@ Devvit.addCustomPostType({
     return (
       <vstack grow padding="small">
         <vstack grow alignment="middle center">
+          <text weight="bold">
+            Highscore: { score ?? '0' }
+          </text>
           <button onPress={() => webView.mount()}>Start App</button>
         </vstack>
       </vstack>
