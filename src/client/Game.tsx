@@ -1,6 +1,8 @@
 import React, { useState, useEffect, useCallback, useRef } from "react";
 import sprite from "/assets/test-sprite.png";
-import boltLogo from './assets/bolt.png'
+import boltLogo from '/assets/bolt.png'
+import sendToDevvit from 'utils'
+
 
 export const Game: React.FC = () => {
     const [balance, setBalance] = useState(50);
@@ -54,6 +56,10 @@ export const Game: React.FC = () => {
             clearInterval(scoreTimerRef.current);
             cancelAnimationFrame(animationRef.current);
 
+            sendToDevvit({
+              type: 'setScore',
+              payload: { newScore: scoreRef.current },
+            });
             return;
         }
 
