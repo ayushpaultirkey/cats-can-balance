@@ -58,7 +58,7 @@ Devvit.addMenuItem({
                 subredditName: subreddit.name,
                 preview: <Preview />,
             });
-            ui.showToast({ text: 'Created post!' });
+            ui.showToast({ text: 'Post created!' });
             ui.navigateTo(post.url);
         } catch (error) {
             if (post) {
