@@ -83,8 +83,11 @@ Devvit.addCustomPostType({
     });
     
     const [score, setScore] = useState(async () => {
-      const redisScore = await context.redis.get(`score_${context.postId}`);
-      return Number(redisScore ?? 0);
+      const userId = context.reddit.getCurrentUsername();
+      const dataId = `score_${userId}`;
+      
+      const currentScore = await context.redis.get(dataId);
+      return Number(currentScore ?? 0);
     });
     
     const webView = useWebView<WebViewMessage, DevvitMessage>({
@@ -92,11 +95,13 @@ Devvit.addCustomPostType({
       async onMessage(message, webView) {
         switch (message.type) {
           case 'setScore':
-            const scoreId = `score_${context.postId}`;
-            const oldScore = await context.redis.get(scoreId);
+            const userId = context.reddit.getCurrentUsername();
+            const dataId = `score_${userId}`;
+            
+            const oldScore = await context.redis.get(dataId);
             const newScore = Number(message.data.newScore);
-
-            if(newScore > oldScore) {
+            
+            if(oldScore && newScore > oldScore) {
               await context.redis.set(scoreId, newScore.toString());
               setScore(newScore);
             }
