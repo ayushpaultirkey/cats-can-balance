@@ -56,10 +56,7 @@ export const Game: React.FC = () => {
             clearInterval(scoreTimerRef.current);
             cancelAnimationFrame(animationRef.current);
 
-            sendToDevvit({
-              type: 'setScore',
-              payload: { newScore: scoreRef.current },
-            });
+            window.parent?.postMessage('setScore', { type: 'setScore'; data: { newScore: scoreRef.current } });
             return;
         }
 
