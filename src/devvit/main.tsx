@@ -84,9 +84,7 @@ Devvit.addCustomPostType({
     
     const [score, setScore] = useState(async () => {
       const userId = await context.reddit.getCurrentUsername();
-      const hashKey = "scores";
-      
-      const currentScore = await context.redis.zScore(userId, hashKey);
+      const currentScore = await context.redis.zScore('scores', userId);
       return Number(currentScore ?? 0);
     });
     
@@ -96,17 +94,19 @@ Devvit.addCustomPostType({
         switch (message.type) {
           case 'setScore':
             const userId = await context.reddit.getCurrentUsername();
-            const hashKey = "scores";
+            const key = "scores";
             
-            const oldScoreStr = await context.redis.hGet(hashKey, userId);
+            const oldScoreStr = await context.redis.zScore(key, userId);
             const oldScore = Number(oldScoreStr ?? 0);
             const newScore = Number(message.data.newScore);
             
             if (!oldScore || newScore > oldScore) {
-              await context.redis.hSet(hashKey, userId, newScore.toString());
+              await context.redis.zAdd(key, {
+                score: newScore,
+                value: userId,
+              });
               setScore(newScore);
             }
-      
             break;
         }
       },
