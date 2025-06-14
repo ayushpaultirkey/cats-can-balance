@@ -83,7 +83,7 @@ Devvit.addCustomPostType({
     });
     
     const [score, setScore] = useState(async () => {
-      const userId = context.reddit.getCurrentUsername();
+      const userId = await context.reddit.getCurrentUsername();
       const hashKey = "scores";
       
       const currentScore = await context.redis.hGet(hashKey, userId);
@@ -95,17 +95,17 @@ Devvit.addCustomPostType({
       async onMessage(message, webView) {
         switch (message.type) {
           case 'setScore':
-            const userId = context.reddit.getCurrentUsername();
-            const hashKey = "scores";
+            // const userId = context.reddit.getCurrentUsername();
+            // const hashKey = "scores";
             
-            const oldScoreStr = await context.redis.hGet(hashKey, userId);
-            const oldScore = Number(oldScoreStr ?? 0);
-            const newScore = Number(message.data.newScore);
+            // const oldScoreStr = await context.redis.hGet(hashKey, userId);
+            // const oldScore = Number(oldScoreStr ?? 0);
+            // const newScore = Number(message.data.newScore);
             
-            if (!oldScore || newScore > oldScore) {
-              await context.redis.hSet(hashKey, userId, newScore.toString());
-              setScore(newScore);
-            }
+            // if (!oldScore || newScore > oldScore) {
+            //   await context.redis.hSet(hashKey, userId, newScore.toString());
+            //   setScore(newScore);
+            // }
       
             break;
         }
