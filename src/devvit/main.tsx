@@ -83,8 +83,7 @@ Devvit.addCustomPostType({
     });
     
     const [score, setScore] = useState(async () => {
-      const userId = await context.reddit.getCurrentUsername();
-      const currentScore = await context.redis.zScore('scores', userId);
+      const currentScore = await context.redis.zScore('scores', username);
       return Number(currentScore ?? 0);
     });
     
@@ -93,21 +92,21 @@ Devvit.addCustomPostType({
       async onMessage(message, webView) {
         switch (message.type) {
           case 'setScore':
-            const userId = await context.reddit.getCurrentUsername();
-            const key = "scores";
+            // const userId = await context.reddit.getCurrentUsername();
+            // const key = "scores";
             
-            const oldScoreStr = await context.redis.zScore(key, userId);
-            const oldScore = Number(oldScoreStr ?? 0);
-            const newScore = Number(message.data.newScore);
+            // const oldScoreStr = await context.redis.zScore(key, userId);
+            // const oldScore = Number(oldScoreStr ?? 0);
+            // const newScore = Number(message.data.newScore);
             
-            if (!oldScore || newScore > oldScore) {
-              await context.redis.zAdd(key, {
-                score: newScore,
-                value: userId,
-              });
-              setScore(newScore);
-            }
-            break;
+            // if (!oldScore || newScore > oldScore) {
+            //   await context.redis.zAdd(key, {
+            //     score: newScore,
+            //     value: userId,
+            //   });
+            //   setScore(newScore);
+            // }
+            // break;
         }
       },
     });
