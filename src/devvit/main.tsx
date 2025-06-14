@@ -18,7 +18,7 @@ export const Preview: Devvit.BlockComponent<{ text?: string }> = ({
         <zstack width={'100%'} height={'100%'} alignment='center middle'>
             <vstack width={'100%'} height={'100%'} alignment='center middle'>
                 <image
-                    url='loading.gif'
+                    url='cat-idle.gif'
                     description='Loading...'
                     height={'140px'}
                     width={'140px'}
@@ -134,7 +134,10 @@ Devvit.addCustomPostType({
             }} />
         </vstack>
         <vstack grow alignment='middle' gap='small'>
-          <text alignment='center' size='xxlarge'>Leaderboard</text>
+          <hstack alignment='middle center' gap='large'>
+            <text size='xxlarge'>Leaderboard</text>
+            <image url='cat-idle.gif' imageWidth={64} imageHeight={64} />
+          </hstack>
           <text alignment='center'>Your Score: {score}</text>
           <vstack alignment='center'>
             {highscores.map((entry, index) => (
