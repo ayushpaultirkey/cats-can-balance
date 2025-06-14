@@ -1,4 +1,5 @@
 import { Devvit, Post, useWebView, useState } from "@devvit/public-api";
+import type { DevvitMessage, WebViewMessage } from 'message';
 
 import "../server/index";
 import { defineConfig } from "@devvit/server";
@@ -86,7 +87,7 @@ Devvit.addCustomPostType({
       return Number(redisScore ?? 0);
     });
     
-    const webView = useWebView({
+    const webView = useWebView<WebViewMessage, DevvitMessage>({
       url: 'index.html',
     });
 
