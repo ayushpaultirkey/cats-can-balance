@@ -147,7 +147,7 @@ export const Game: React.FC = () => {
                         </li>
                     </ul>
 
-                    <div className='flex justify-center'>
+                    <div className='sprite-container'>
                         <div
                             style={{
                                 width: '128px',
