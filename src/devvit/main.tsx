@@ -81,12 +81,10 @@ Devvit.addMenuItem({
     forUserType: 'moderator',
     onPress: async (_event, context) => {
         try {
-            const scores = await context.redis.hGetAll('score');
-            const fields = Object.keys(scores);
-            const deletePromises = fields.map(field =>
-              context.redis.hDel('score', field)
+            const scoreKeys = await context.redis.hKeys('score');
+            await Promise.all(
+              scoreKeys.map((field) => context.redis.hDel('score', field))
             );
-            await Promise.all(deletePromises);
             context.ui.showToast({ text: 'Score reset!' });
         } catch (error) {
             console.log(error);
