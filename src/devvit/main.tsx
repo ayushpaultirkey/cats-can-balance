@@ -5,7 +5,7 @@ import { defineConfig } from '@devvit/server';
 import { postConfigNew } from '../server/core/post';
 
 defineConfig({
-  name: '[Bolt] Cats can balance',
+  name: 'Cats can balance',
   entry: 'index.html',
   height: 'tall',
   menu: { enable: false },
