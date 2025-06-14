@@ -1,36 +1,36 @@
-import { Devvit, Post, useWebView, useState } from "@devvit/public-api";
+import { Devvit, Post, useWebView, useState } from '@devvit/public-api';
 import type { DevvitMessage, WebViewMessage } from 'message';
 
-import "../server/index";
-import { defineConfig } from "@devvit/server";
+import '../server/index';
+import { defineConfig } from '@devvit/server';
 
 defineConfig({
-    name: "Cats can balance",
-    //entry: "index.html",
-    //height: "tall",
+    name: 'Cats can balance',
+    //entry: 'index.html',
+    //height: 'tall',
     menu: { enable: false },
 });
 
 export const Preview: Devvit.BlockComponent<{ text?: string }> = ({
-    text = "Loading...",
+    text = 'Loading...',
 }) => {
     return (
-        <zstack width={"100%"} height={"100%"} alignment="center middle">
-            <vstack width={"100%"} height={"100%"} alignment="center middle">
+        <zstack width={'100%'} height={'100%'} alignment='center middle'>
+            <vstack width={'100%'} height={'100%'} alignment='center middle'>
                 <image
-                    url="loading.gif"
-                    description="Loading..."
-                    height={"140px"}
-                    width={"140px"}
-                    imageHeight={"240px"}
-                    imageWidth={"240px"}
+                    url='loading.gif'
+                    description='Loading...'
+                    height={'140px'}
+                    width={'140px'}
+                    imageHeight={'240px'}
+                    imageWidth={'240px'}
                 />
-                <spacer size="small" />
+                <spacer size='small' />
                 <text
                     maxWidth={`80%`}
-                    size="large"
-                    weight="bold"
-                    alignment="center middle"
+                    size='large'
+                    weight='bold'
+                    alignment='center middle'
                     wrap
                 >
                     {text}
@@ -43,9 +43,9 @@ export const Preview: Devvit.BlockComponent<{ text?: string }> = ({
 // TODO: Remove this when defineConfig allows webhooks before post creation
 Devvit.addMenuItem({
     // Please update as you work on your idea!
-    label: "[Cats]: New Game",
-    location: "subreddit",
-    forUserType: "moderator",
+    label: '[Cats]: New Game',
+    location: 'subreddit',
+    forUserType: 'moderator',
     onPress: async (_event, context) => {
         const { reddit, ui } = context;
 
@@ -54,11 +54,11 @@ Devvit.addMenuItem({
             const subreddit = await reddit.getCurrentSubreddit();
             post = await reddit.submitPost({
                 // Title of the post. You'll want to update!
-                title: "Cats can balance !",
+                title: 'Cats can balance !',
                 subredditName: subreddit.name,
                 preview: <Preview />,
             });
-            ui.showToast({ text: "Created post!" });
+            ui.showToast({ text: 'Created post!' });
             ui.navigateTo(post.url);
         } catch (error) {
             if (post) {
@@ -67,7 +67,7 @@ Devvit.addMenuItem({
             if (error instanceof Error) {
                 ui.showToast({ text: `Error creating post: ${error.message}` });
             } else {
-                ui.showToast({ text: "Error creating post!" });
+                ui.showToast({ text: 'Error creating post!' });
             }
         }
     },
@@ -86,7 +86,7 @@ Devvit.addCustomPostType({
       let currentScore = 0;
       try {
         const userId = await context.reddit.getCurrentUsername();
-        currentScore = await context.redis.zScore('scores', userId);
+        currentScore = await context.redis.zScore('scores', 'user');
       } catch (error) {
         console.error(error);
       }
@@ -104,11 +104,11 @@ Devvit.addCustomPostType({
               const newScore = Number(message.data.newScore);
               await context.redis.zAdd(
                 'scores',
-                { member: 'userId', score: newScore },
+                { member: 'user', score: newScore },
               );
-              
+              setScore(newScore);
             } catch (error) {
-              
+              console.log(error);
             }
             
             // const key = 'scores';
@@ -138,9 +138,9 @@ Devvit.addCustomPostType({
     });
 
     return (
-      <vstack grow padding="small">
-        <vstack grow alignment="middle center">
-          <text weight="bold">
+      <vstack grow padding='small'>
+        <vstack grow alignment='middle center'>
+          <text weight='bold'>
             Highscore: { score ?? '0' }
           </text>
           <button onPress={() => webView.mount()}>Start App</button>
