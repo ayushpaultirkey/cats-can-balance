@@ -111,7 +111,7 @@ export const Game: React.FC = () => {
         <>
             <div className="h-full flex flex-col justify-center items-center bg-zinc-900 text-zinc-200 select-none">
                 <div className="border-8 border-amber-600 rounded-md min-w-96 relative">
-            				<div className="absolute top-2 right-2 sm:-top-5 sm:-right-5">
+            				<div className="absolute top-2 right-2 sm:-top-4 sm:-right-4">
                         <img
                             src={boltLogo}
                             alt="Bolt.new"
