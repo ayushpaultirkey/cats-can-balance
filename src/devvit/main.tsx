@@ -83,17 +83,8 @@ Devvit.addCustomPostType({
     });
     
     const [score, setScore] = useState(async () => {
-      let currentScore = 0;
-      try {
-        const userId = await context.reddit.getCurrentUsername();
-        currentScore = await context.redis.zScore('scores', 'user');
-        // await context.redis.zAdd(
-        //   'scores',
-        //   { member: 'user', score: 37 },
-        // );
-      } catch (error) {
-        console.error(error);
-      }
+      const userId = await context.reddit.getCurrentUsername() ?? 'anon';
+      const currentScore = await context.redis.get(userId);
       return Number(currentScore ?? 0);
     });
     
@@ -103,39 +94,20 @@ Devvit.addCustomPostType({
         switch (message.type) {
           case 'setScore':
             
-            try {
-              const userId = await context.reddit.getCurrentUsername();
-              const newScore = Number(message.data.newScore);
-              await context.redis.zAdd(
-                'scores',
-                { member: 'user', score: newScore },
-              );
+            const userId = await context.reddit.getCurrentUsername();
+            
+            const oldScoreStr = await context.redis.get(userId ?? 'anon');
+            const newScore = Number(message.data.newScore ?? 0);
+            const oldScore = Number(oldScoreStr ?? 0);
+            
+            if (!oldScore || newScore > oldScore) {
+              await context.redis.zAdd(key, {
+                score: newScore,
+                value: userId,
+              });
               setScore(newScore);
-            } catch (error) {
-              console.log(error);
             }
             
-            // const key = 'scores';
-            // const userId = await context.reddit.getCurrentUsername();
-            // if(userId) {
-
-            //   const oldScore = await context.redis.zScore(key, userId);
-
-              
-            //   const newScore = Number(message.data.newScore);
-              
-            //   if (!oldScore || newScore > oldScore) {
-            //     await context.redis.zAdd(key, {
-            //       score: newScore,
-            //       value: userId,
-            //     });
-            //     setScore(newScore);
-            //   }
-              
-            // }
-            // else {
-            //   console.log('invalid user');
-            // }
             break;
         }
       },
