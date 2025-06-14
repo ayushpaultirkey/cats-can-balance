@@ -1,4 +1,4 @@
-import { Devvit, Post, useWebView  } from "@devvit/public-api";
+import { Devvit, Post, useWebView, useState } from "@devvit/public-api";
 
 import "../server/index";
 import { defineConfig } from "@devvit/server";
