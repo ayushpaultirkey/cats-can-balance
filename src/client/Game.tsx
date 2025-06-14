@@ -9,6 +9,7 @@ export const Game: React.FC = () => {
     const [balance, setBalance] = useState(50);
     const [score, setScore] = useState(0);
     const [isGameRunning, setIsGameRunning] = useState(false);
+	  const [isGameStarted, setIsGameStarted] = useState(false);
 
     const balanceRef = useRef<number>(50);
     const directionRef = useRef<'left' | 'right' | null>(null);
