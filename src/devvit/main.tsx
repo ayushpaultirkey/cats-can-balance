@@ -101,10 +101,7 @@ Devvit.addCustomPostType({
             const oldScore = Number(oldScoreStr ?? 0);
             
             if (!oldScore || newScore > oldScore) {
-              await context.redis.zAdd(key, {
-                score: newScore,
-                value: userId,
-              });
+              await context.redis.Set(userId, newScore.toString());
               setScore(newScore);
             }
             
