@@ -96,6 +96,10 @@ body {
     transform: rotate(5deg);
 }
 
+.sprite-container {
+    @apply flex justify-center;
+}
+
 .game-control {
     @apply flex flex-row;
 }
