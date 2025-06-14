@@ -124,6 +124,9 @@ Devvit.addCustomPostType({
       <vstack grow padding='small'>
         <vstack grow alignment='middle center'>
           <text>
+            Leaderboard
+          </text>
+          <text>
             Your Score: { score ?? '0' }
           </text>
           {highscores.map((entry, index) => (
