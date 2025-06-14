@@ -1,5 +1,5 @@
-import React, { useState, useEffect, useCallback, useRef } from "react";
-import catSprite from "/assets/cat-balance.png";
+import React, { useState, useEffect, useCallback, useRef } from 'react';
+import catSprite from '/assets/cat-balance.png';
 import boltLogo from '/assets/bolt.png'
 import sendToDevvit from 'utils'
 
@@ -10,7 +10,7 @@ export const Game: React.FC = () => {
     const [isGameRunning, setIsGameRunning] = useState(false);
 
     const balanceRef = useRef<number>(50);
-    const directionRef = useRef<"left" | "right" | null>(null);
+    const directionRef = useRef<'left' | 'right' | null>(null);
 
     const animationRef = useRef<number>();
     const animationTimeRef = useRef<number>(performance.now());
@@ -41,10 +41,10 @@ export const Game: React.FC = () => {
         }
 
         const hoverForce = 15 * delta;
-        if (directionRef.current === "left") {
+        if (directionRef.current === 'left') {
             nextBalance -= hoverForce;
         }
-        if (directionRef.current === "right") {
+        if (directionRef.current === 'right') {
             nextBalance += hoverForce;
         }
 
@@ -56,7 +56,7 @@ export const Game: React.FC = () => {
             clearInterval(scoreTimerRef.current);
             cancelAnimationFrame(animationRef.current);
 
-            window.parent?.postMessage({ type: 'setScore', data: { newScore: scoreRef.current } }, "*");
+            window.parent?.postMessage({ type: 'setScore', data: { newScore: scoreRef.current } }, '*');
             return;
         }
 
@@ -109,20 +109,21 @@ export const Game: React.FC = () => {
 
     return (
         <>
-            <div className="h-full flex flex-col justify-center items-center bg-zinc-900 text-zinc-200 select-none">
-                <div className="border-8 border-amber-600 rounded-md min-w-96 relative">
-            				<div className="absolute top-2 right-2 sm:-top-4 sm:-right-4">
+            <div className='game-container'>
+                <div className='game-frame'>
+                  
+            				<div className='logo-container'>
                         <img
                             src={boltLogo}
-                            alt="Bolt.new"
-                            className="w-16 h-16 sm:w-20 sm:h-20 cursor-pointer"
+                            alt='Bolt.new'
+                            className='logo'
                             onClick={() => {
-                                window.parent?.postMessage({ type: 'boltNavigate' }, "*");
+                                window.parent?.postMessage({ type: 'boltNavigate' }, '*');
                             }}
                         />
             				</div>
                   
-                    <ul className="words">
+                    <ul className='words'>
                         <li>
                             <p>Cats</p>
                         </li>
@@ -132,57 +133,44 @@ export const Game: React.FC = () => {
                         <li>
                             <p>Balance !</p>
                         </li>
-                        <li className="flex flex-row">
+                        <li className='flex flex-row'>
                             <button
-                                className="bg-amber-600 disabled:opacity-20 cursor-pointer"
+                                className='start-button'
                                 disabled={isGameRunning}
-                                onClick={startGame}
-                            >
-                                Start
-                            </button>
-                            <div className="flex flex-row relative">
+                                onClick={startGame}>Start</button>
+                            <div className='score-container'>
                                 <p>Score:</p>
-                                <p className="absolute sm:left-full sm:top-0 left-3 top-full p-0!">
+                                <p className='score'>
                                     {score}
                                 </p>
                             </div>
                         </li>
                     </ul>
 
-                    <div className="flex justify-center">
+                    <div className='sprite-container'>
                         <div
                             style={{
-                                width: "128px",
-                                height: "128px",
-                                backgroundImage: "url(" + catSprite + ")",
+                                width: '128px',
+                                height: '128px',
+                                backgroundImage: 'url(' + catSprite + ')',
                                 backgroundPosition: getcatSpritePosition(balance),
-                                backgroundSize: "1280px 1280px",
-                                imageRendering: "pixelated",
+                                backgroundSize: '1280px 1280px',
+                                imageRendering: 'pixelated',
                             }}
                         ></div>
                     </div>
 
-                    <div className="flex flex-row">
+                    <div className='game-control'>
                         <button
-                            className="w-full text-center py-3 text-amber-600 border-t-4 border-r-4 border-amber-600 font-bold cursor-pointer disabled:opacity-0 disabled:pointer-events-none"
                             disabled={!isGameRunning}
-                            onMouseEnter={() => (directionRef.current = "left")}
-                            onMouseLeave={() => (directionRef.current = null)}
-                        >
-                            &#11207;
-                        </button>
-
+                            onMouseEnter={() => (directionRef.current = 'left')}
+                            onMouseLeave={() => (directionRef.current = null)}>&#11207;</button>
                         <button
-                            className="w-full text-center py-3 text-amber-600 border-t-4 border-amber-600 font-bold cursor-pointer disabled:opacity-0  disabled:pointer-events-none"
                             disabled={!isGameRunning}
-                            onMouseEnter={() =>
-                                (directionRef.current = "right")
-                            }
-                            onMouseLeave={() => (directionRef.current = null)}
-                        >
-                            &#11208;
-                        </button>
+                            onMouseEnter={() => (directionRef.current = 'right')}
+                            onMouseLeave={() => (directionRef.current = null)}>&#11208;</button>
                     </div>
+                  
                 </div>
             </div>
         </>
