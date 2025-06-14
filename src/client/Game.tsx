@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useCallback, useRef } from "react";
-import sprite from "/assets/test-sprite.png";
+import catSprite from "/assets/cat-balance.png";
 import boltLogo from '/assets/bolt.png'
 import sendToDevvit from 'utils'
 
@@ -98,7 +98,7 @@ export const Game: React.FC = () => {
         };
     }, []);
 
-    const getSpritePosition = (balance) => {
+    const getcatSpritePosition = (balance) => {
         const frame = Math.min(99, Math.max(0, Math.floor(balance)));
         const col = frame % 10;
         const row = Math.floor(frame / 10);
@@ -154,8 +154,8 @@ export const Game: React.FC = () => {
                             style={{
                                 width: "128px",
                                 height: "128px",
-                                backgroundImage: "url(" + sprite + ")",
-                                backgroundPosition: getSpritePosition(balance),
+                                backgroundImage: "url(" + catSprite + ")",
+                                backgroundPosition: getcatSpritePosition(balance),
                                 backgroundSize: "1280px 1280px",
                                 imageRendering: "pixelated",
                             }}
