@@ -152,14 +152,20 @@ Devvit.addCustomPostType({
           </vstack>
           <vstack border='thin' borderColor='#444444' cornerRadius='small'></vstack>
           <vstack alignment='center'>
-            {highscores.map((entry, index) => (
-              <text size='small'>
-                u/{entry.user}: {entry.score}
-              </text>
-            ))}
+            {
+              highscores.map((entry, index) => (
+                <hstack gap='small'>
+                  <text size='small'>u/{entry.user}:</text>
+                  <text size='small' weight='bold'>{entry.score}</text>
+                </hstack>
+              ))
+            }
           </vstack>
           <vstack border='thin' borderColor='#444444' cornerRadius='small'></vstack>
-          <text alignment='center'>Your Score: {score}</text>
+          <hstack alignment='center' gap='small'>
+            <text>Your Score:</text>
+            <text weight='bold'>{score}</text>
+          </hstack>
           <vstack alignment='middle center'>
             <button onPress={() => webView.mount()}>Start App</button>
           </vstack>
