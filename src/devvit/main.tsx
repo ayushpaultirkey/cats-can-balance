@@ -86,13 +86,23 @@ Devvit.addCustomPostType({
       const currentScore = await context.redis.hGet('score', username);
       return Number(currentScore ?? 0);
     });
+
+    const [highscores, setHighscores] = useState(async () => {
+      const scores = await context.redis.hGetAll('score');
+      const entries = Object.entries(record).map(([user, score]) => ({
+        user,
+        score: Number(score),
+      }));
+      entries.sort((a, b) => b.score - a.score);
+      return entries.slice(0, 10);
+    ]});
     
     const webView = useWebView<WebViewMessage, DevvitMessage>({
       url: 'index.html',
       async onMessage(message, webView) {
+        
         switch (message.type) {
           case 'setScore':
-            
             const oldScoreStr = await context.redis.hGet('score', username);
             const newScore = Number(message.data.newScore ?? 0);
             const oldScore = Number(oldScoreStr ?? 0);
@@ -104,9 +114,9 @@ Devvit.addCustomPostType({
               await context.redis.hSet('score', data);
               setScore(newScore);
             }
-            
             break;
         }
+        
       },
     });
 
@@ -116,6 +126,11 @@ Devvit.addCustomPostType({
           <text weight='bold'>
             Highscore: { score ?? '0' }
           </text>
+          {highscores.map((entry, index) => (
+            <text>
+              {entry.user}: {entry.score}
+            </text>
+          ))}
           <button onPress={() => webView.mount()}>Start App</button>
         </vstack>
       </vstack>
