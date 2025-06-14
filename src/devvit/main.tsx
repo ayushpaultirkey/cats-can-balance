@@ -126,13 +126,6 @@ Devvit.addCustomPostType({
 
     return (
       <zstack grow alignment='middle center' padding='small'>
-        <vstack alignment='top end' width='100%' height='100%'>
-          <image url='bolt.png' imageWidth={96} imageHeight={96} onPress={
-            () => {
-              const url = 'https://bolt.new/';
-              context.ui.navigateTo(url);
-            }} />
-        </vstack>
         <vstack grow alignment='middle' gap='small'>
           <hstack alignment='middle center' gap='medium'>
             <text size='xxlarge'>Leaderboard</text>
@@ -149,6 +142,13 @@ Devvit.addCustomPostType({
           <vstack alignment='middle center'>
             <button onPress={() => webView.mount()}>Start App</button>
           </vstack>
+        </vstack>
+        <vstack alignment='top end' width='100%' height='100%'>
+          <image url='bolt.png' imageWidth={96} imageHeight={96} onPress={
+            () => {
+              const url = 'https://bolt.new/';
+              context.ui.navigateTo(url);
+            }} />
         </vstack>
       </zstack>
     );
