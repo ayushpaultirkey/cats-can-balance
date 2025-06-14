@@ -125,14 +125,16 @@ Devvit.addCustomPostType({
     });
 
     return (
-      <vstack grow padding='small'>
-        <vstack grow alignment='middle center' gap='small'>
-          <text size='xxlarge'>
-            Leaderboard:
-          </text>
-          <text>
-            Your Score: { score ?? '0' }
-          </text>
+      <zstack grow alignment='middle center' padding='small'>
+        <vstack alignment='top end' width='100%' height='100%'>
+          <image url='bolt.png' imageWidth={64} imageHeight={64} onPress={ () => {
+            const url = 'https://bolt.new/';
+            context.ui.navigateTo(url);
+          }} />
+        </vstack>
+        <vstack grow alignment='middle' gap='small'>
+          <text alignment='center' size='xxlarge'>Leaderboard</text>
+          <text alignment='center'>Your Score: 0</text>
           <vstack>
             {highscores.map((entry, index) => (
               <text size='small'>
@@ -140,9 +142,11 @@ Devvit.addCustomPostType({
               </text>
             ))}
           </vstack>
-          <button onPress={() => webView.mount()}>Start App</button>
+          <vstack alignment='middle center'>
+            <button>Start App</button>
+          </vstack>
         </vstack>
-      </vstack>
+      </zstack>
     );
   },
 });
