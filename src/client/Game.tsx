@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useCallback, useRef } from 'react';
-import catSprite from '/assets/cat-balance.png';
+import catBalance from '/assets/cat-balance.png';
+import catIdle from '/assets/cat-idle.gif';
 import boltLogo from '/assets/bolt.png'
 import sendToDevvit from 'utils'
 
@@ -71,6 +72,7 @@ export const Game: React.FC = () => {
             return;
         }
 
+		    setIsGameStarted(true);
         setIsGameRunning(true);
         setBalance(50);
         setScore(0);
@@ -98,7 +100,7 @@ export const Game: React.FC = () => {
         };
     }, []);
 
-    const getcatSpritePosition = (balance) => {
+    const getcatBalancePosition = (balance) => {
         const frame = Math.min(99, Math.max(0, Math.floor(balance)));
         const col = frame % 10;
         const row = Math.floor(frame / 10);
@@ -149,15 +151,22 @@ export const Game: React.FC = () => {
 
                     <div className='sprite-container'>
                         <div
+						                className={isGameStarted ? '' : 'hidden'}
                             style={{
                                 width: '128px',
                                 height: '128px',
-                                backgroundImage: 'url(' + catSprite + ')',
-                                backgroundPosition: getcatSpritePosition(balance),
+                                backgroundImage: 'url(' + catBalance + ')',
+                                backgroundPosition: getcatBalancePosition(balance),
                                 backgroundSize: '1280px 1280px',
                                 imageRendering: 'pixelated',
                             }}
                         ></div>
+              					<img
+              						className={isGameStarted ? 'hidden' : ''}
+              						src={catIdle}
+              						width={128}
+              						height={128}
+              					/>
                     </div>
 
                     <div className='game-control'>
