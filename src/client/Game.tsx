@@ -117,7 +117,7 @@ export const Game: React.FC = () => {
                             alt="Bolt.new"
                             className="w-16 h-16 sm:w-20 sm:h-20 cursor-pointer"
                             onClick={() => {
-                                window.open('https://bolt.new/', '_blank');
+                                window.parent?.postMessage({ type: 'boltNavigate' }, "*");
                             }}
                         />
             				</div>
