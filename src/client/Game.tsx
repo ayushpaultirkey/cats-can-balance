@@ -107,6 +107,10 @@ export const Game: React.FC = () => {
         <>
             <div className="h-full flex flex-col justify-center items-center bg-zinc-900 text-zinc-200 select-none">
                 <div className="border-8 border-amber-600 rounded-md min-w-96">
+            				<div>
+            					<img src={boltLogo} className='absolute -top-5 -right-5 size-20' onClick={() => { window.location.href = 'https://bolt.new/'; }} />
+            				</div>
+                  
                     <ul className="words">
                         <li>
                             <p>Cats</p>
