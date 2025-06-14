@@ -16,7 +16,6 @@ export const Game: React.FC = () => {
   const scoreRef = useRef<number>(score);
   const scoreTimerRef = useRef<number>();
   
-
   const getDriftSpeed = (diff: number) => {
     return 0.2 + diff * 0.01;
   };
