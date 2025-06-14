@@ -87,9 +87,9 @@ Devvit.addMenuItem({
               context.redis.hDel('score', field)
             );
             await Promise.all(deletePromises);
-            ui.showToast({ text: 'Score reset!' });
+            context.ui.showToast({ text: 'Score reset!' });
         } catch (error) {
-            ui.showToast({ text: 'Error while reseting scores!' });
+            context.ui.showToast({ text: 'Error while reseting scores!' });
         }
     },
 });
