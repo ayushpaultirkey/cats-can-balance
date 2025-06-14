@@ -146,11 +146,11 @@ Devvit.addCustomPostType({
     return (
       <zstack grow alignment='middle center' padding='small'>
         <vstack grow alignment='middle' gap='small'>
-          <hstack alignment='middle center' gap='medium'>
+          <vstack alignment='middle center' gap='medium'>
+            <image url='cat-idle.gif' imageWidth={32} imageHeight={32} />
             <text size='xxlarge' style='heading'>Leaderboard</text>
-            <image url='cat-idle.gif' imageWidth={64} imageHeight={64} />
-          </hstack>
-          <text alignment='center'>Your Score: {score}</text>
+          </vstack>
+          <vstack border='thin' borderColor='#444444' cornerRadius='small'></vstack>
           <vstack alignment='center'>
             {highscores.map((entry, index) => (
               <text size='small'>
@@ -158,12 +158,14 @@ Devvit.addCustomPostType({
               </text>
             ))}
           </vstack>
+          <vstack border='thin' borderColor='#444444' cornerRadius='small'></vstack>
+          <text alignment='center'>Your Score: {score}</text>
           <vstack alignment='middle center'>
             <button onPress={() => webView.mount()}>Start App</button>
           </vstack>
         </vstack>
-        <vstack alignment='top end' width='100%' height='100%'>
-          <image url='bolt.png' imageWidth={96} imageHeight={96} onPress={
+        <vstack alignment='top end' width='100%' height='100%' border='thick' lightBorderColor="#444444" darkBorderColor="#ff8905" cornerRadius='small'>
+          <image url='bolt.png' imageWidth={86} imageHeight={86} onPress={
             () => {
               const url = 'https://bolt.new/';
               context.ui.navigateTo(url);
