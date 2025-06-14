@@ -35,7 +35,7 @@ export const Preview: Devvit.BlockComponent<{ text?: string }> = ({ text = 'Load
 // TODO: Remove this when defineConfig allows webhooks before post creation
 Devvit.addMenuItem({
   // Please update as you work on your idea!
-  label: '[Bolt Word Guesser]: New Post',
+  label: '[Cats can balance]: New Game',
   location: 'subreddit',
   forUserType: 'moderator',
   onPress: async (_event, context) => {
@@ -46,7 +46,7 @@ Devvit.addMenuItem({
       const subreddit = await reddit.getCurrentSubreddit();
       post = await reddit.submitPost({
         // Title of the post. You'll want to update!
-        title: 'Word Guesser',
+        title: 'Cats can balance !',
         subredditName: subreddit.name,
         preview: <Preview />,
       });
