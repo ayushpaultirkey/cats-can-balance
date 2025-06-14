@@ -73,6 +73,27 @@ Devvit.addMenuItem({
     },
 });
 
+// TODO: Remove this when defineConfig allows webhooks before post creation
+Devvit.addMenuItem({
+    // Please update as you work on your idea!
+    label: '[Cats]: Reset Game',
+    location: 'subreddit',
+    forUserType: 'moderator',
+    onPress: async (_event, context) => {
+        try {
+            const scores = await context.redis.hGetAll('score');
+            const fields = Object.keys(scores);
+            const deletePromises = fields.map(field =>
+              context.redis.hDel('score', field)
+            );
+            await Promise.all(deletePromises);
+            ui.showToast({ text: 'Score reset!' });
+        } catch (error) {
+            ui.showToast({ text: 'Error while reseting scores!' });
+        }
+    },
+});
+
 Devvit.addCustomPostType({
   name: 'Cats Post',
   height: 'tall',
