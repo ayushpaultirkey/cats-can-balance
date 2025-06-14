@@ -131,7 +131,7 @@ Devvit.addCustomPostType({
           </text>
           <vstack>
             {highscores.map((entry, index) => (
-              <text>
+              <text size='small'>
                 u/{entry.user}: {entry.score}
               </text>
             ))}
