@@ -6,6 +6,17 @@ body {
         "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
 }
 
+.game-container {
+    @apply h-full flex flex-col select-none;
+    @apply justify-center items-center;
+    @apply bg-zinc-900 text-zinc-200;
+}
+.game-frame {
+    @apply min-w-96 relative;
+    @apply rounded-md;
+    @apply border-8 border-amber-600;
+}
+
 .words {
     margin: 0 auto;
     padding: 80px 0px;
@@ -54,9 +65,50 @@ body {
     vertical-align: top;
     white-space: nowrap;
 }
-.words > li button {
+
+.start-button {
+    @apply bg-amber-600;
+    @apply cursor-pointer disabled:opacity-20;
     transition: 0.25s ease-in-out;
 }
-.words > li button:hover {
+.start-button:not(:disabled):hover {
     opacity: 0.65;
+}
+
+.score-container {
+    @apply flex flex-row relative;
+}
+.score-container .score {
+    @apply p-0! absolute;
+    @apply sm:left-full sm:top-0 left-3 top-full;
+}
+
+.logo-container {
+    @apply absolute;
+    @apply top-2 right-2 sm:-top-5 sm:-right-5;
+}
+.logo {
+    @apply w-16 h-16 sm:w-20 sm:h-20;
+    @apply cursor-pointer;
+    transition: 0.25s ease-in-out;
+}
+.logo:hover {
+    transform: rotate(5deg);
+}
+
+.game-control {
+    @apply flex flex-row;
+}
+.game-control > button {
+    @apply w-full py-3;
+    @apply text-center text-amber-600 font-bold;
+    @apply border-t-4 border-amber-600;
+    @apply cursor-pointer;
+    @apply disabled:opacity-0 disabled:pointer-events-none;
+}
+.game-control > button:hover {
+    @apply bg-amber-600 bg-amber-950;
+}
+.game-control > button:nth-child(1) {
+    @apply border-r-4;
 }
