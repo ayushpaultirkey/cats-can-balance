@@ -94,7 +94,7 @@ Devvit.addCustomPostType({
         score: Number(score),
       }));
       entries.sort((a, b) => b.score - a.score);
-      return entries.slice(0, 10);
+      return entries.slice(0, 5);
     });
     
     const webView = useWebView<WebViewMessage, DevvitMessage>({
