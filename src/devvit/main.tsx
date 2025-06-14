@@ -83,11 +83,7 @@ Devvit.addMenuItem({
         const { redis, ui } = context;
         try {
             const scoreKeys = await redis.hKeys('score');
-            await Promise.all(
-              scoreKeys.map((field) => {
-                console.log(field);  
-              })
-            );
+            await redis.hDel('score', scoreKeys);
             ui.showToast({ text: 'Score reset!' });
         } catch (error) {
             console.log(error);
