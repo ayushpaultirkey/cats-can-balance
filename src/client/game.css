@@ -107,7 +107,8 @@ body {
 }
 .game-control > button {
     @apply w-full py-3;
-    @apply text-center text-amber-600 font-bold;
+    @apply text-amber-600 font-bold;
+    @apply flex justify-center items-center;
     @apply border-t-4 border-amber-600;
     @apply cursor-pointer;
     @apply disabled:opacity-0 disabled:pointer-events-none;
