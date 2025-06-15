@@ -175,15 +175,15 @@ export const Game: React.FC = () => {
                     <div className='game-control'>
             					<button
             						disabled={!isGameRunning}
-            						onMouseEnter={() => (hoverRef.current = 'left')}
-            						onMouseLeave={() => (hoverRef.current = null)}>
+            						onMouseEnter={() => (directionRef.current = 'left')}
+            						onMouseLeave={() => (directionRef.current = null)}>
             						<Icon path={mdiChevronLeft} size={1} />
             					</button>
             
             					<button
             						disabled={!isGameRunning}
-            						onMouseEnter={() => (hoverRef.current = 'right')}
-            						onMouseLeave={() => (hoverRef.current = null)}>
+            						onMouseEnter={() => (directionRef.current = 'right')}
+            						onMouseLeave={() => (directionRef.current = null)}>
             						<Icon path={mdiChevronRight} size={1} />
             					</button>
                     </div>
