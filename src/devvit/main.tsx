@@ -170,10 +170,11 @@ Devvit.addCustomPostType({
           <vstack alignment='middle center'>
             <button onPress={() => webView.mount()}>Start App</button>
             <button appearance='destructive' onPress={
-              () => {
+              async () => {
                 const { redis, ui } = context;
                 try {
                     await redis.hDel('score', [username]);
+                    setScore(0);
                     ui.showToast({ text: 'Score reset!' });
                 } catch (error) {
                     console.log(error);
