@@ -169,6 +169,18 @@ Devvit.addCustomPostType({
           </hstack>
           <vstack alignment='middle center'>
             <button onPress={() => webView.mount()}>Start App</button>
+            <button appearance='destructive' onPress={
+              () => {
+                const { redis, ui } = context;
+                try {
+                    await redis.hDel('score', [username]);
+                    ui.showToast({ text: 'Score reset!' });
+                } catch (error) {
+                    console.log(error);
+                    ui.showToast({ text: 'Error while reseting scores!' });
+                }
+              }
+            }>Reset Score</button>
           </vstack>
         </vstack>
         <vstack alignment='top end' width='100%' height='100%' border='thick' lightBorderColor="#444444" darkBorderColor="#ff8905" cornerRadius='small'>
