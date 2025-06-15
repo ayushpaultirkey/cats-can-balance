@@ -167,7 +167,7 @@ Devvit.addCustomPostType({
             <text>Your Score:</text>
             <text weight='bold'>{score}</text>
           </hstack>
-          <vstack alignment='middle center'>
+          <hstack alignment='middle center' gap='small'>
             <button onPress={() => webView.mount()}>Start App</button>
             <button appearance='destructive' onPress={
               async () => {
@@ -182,7 +182,7 @@ Devvit.addCustomPostType({
                 }
               }
             }>Reset Score</button>
-          </vstack>
+          </hstack>
         </vstack>
         <vstack alignment='top end' width='100%' height='100%' border='thick' lightBorderColor="#444444" darkBorderColor="#ff8905" cornerRadius='small'>
           <image url='bolt.png' imageWidth={86} imageHeight={86} onPress={
