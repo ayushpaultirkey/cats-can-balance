@@ -114,7 +114,7 @@ body {
     @apply disabled:opacity-0 disabled:pointer-events-none;
 }
 .game-control > button:hover {
-    @apply bg-amber-600 bg-amber-950;
+    @apply bg-amber-950;
 }
 .game-control > button:nth-child(1) {
     @apply border-r-4;
