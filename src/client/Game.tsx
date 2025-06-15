@@ -1,8 +1,10 @@
 import React, { useState, useEffect, useCallback, useRef } from 'react';
+import Icon from '@mdi/react';
+import { mdiChevronLeft, mdiChevronRight } from '@mdi/js';
+
 import catBalance from '/assets/cat-balance.png';
 import catIdle from '/assets/cat-idle.gif';
-import boltLogo from '/assets/bolt.png'
-import sendToDevvit from 'utils'
+import boltLogo from '/assets/bolt.png';
 
 
 export const Game: React.FC = () => {
@@ -171,14 +173,19 @@ export const Game: React.FC = () => {
                     </div>
 
                     <div className='game-control'>
-                        <button
-                          disabled={!isGameRunning}
-                          onMouseEnter={() => (directionRef.current = 'left')}
-                          onMouseLeave={() => (directionRef.current = null)}>&#11207;</button>
-                        <button
-                          disabled={!isGameRunning}
-                          onMouseEnter={() => (directionRef.current = 'right')}
-                          onMouseLeave={() => (directionRef.current = null)}>&#11208;</button>
+            					<button
+            						disabled={!isGameRunning}
+            						onMouseEnter={() => (hoverRef.current = 'left')}
+            						onMouseLeave={() => (hoverRef.current = null)}>
+            						<Icon path={mdiChevronLeft} size={1} />
+            					</button>
+            
+            					<button
+            						disabled={!isGameRunning}
+            						onMouseEnter={() => (hoverRef.current = 'right')}
+            						onMouseLeave={() => (hoverRef.current = null)}>
+            						<Icon path={mdiChevronRight} size={1} />
+            					</button>
                     </div>
                   
                 </div>
